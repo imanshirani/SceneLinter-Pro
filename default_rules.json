@@ -1,0 +1,95 @@
+[
+    {
+        "children": [
+            {
+                "condition": {
+                    "maxscript_property": "(rendSaveFile == true and rendOutputFilename != \"\")",
+                    "type": "property_equals",
+                    "value": "True"
+                },
+                "enabled": true,
+                "error_message": "Render output is not enabled or path is not set!",
+                "fix_script": "maxOps.GetRenderOutputFilename()",
+                "name": "Check Render Output Is Enabled",
+                "type": "rule"
+            },
+            {
+                "condition": {
+                    "maxscript_property": "renderWidth",
+                    "type": "min_value",
+                    "value": "1280"
+                },
+                "enabled": true,
+                "error_message": "Render width is too low for a final render.",
+                "fix_script": "",
+                "name": "Check Minimum Render Width",
+                "type": "rule"
+            }
+        ],
+        "enabled": true,
+        "name": "Render Settings",
+        "type": "folder"
+    },
+    {
+        "children": [
+            {
+                "condition": {
+                    "maxscript_property": "geometry",
+                    "type": "collection_property_all_match",
+                    "value": "renderable"
+                },
+                "enabled": true,
+                "error_message": "The following objects are not renderable",
+                "fix_script": "for obj in geometry where obj.renderable == false do obj.renderable = true",
+                "name": "Check if All Geometry is Renderable",
+                "type": "rule"
+            },
+            {
+                "condition": {
+                    "maxscript_property": "(for obj in objects where obj.isFrozen collect obj).count",
+                    "type": "max_value",
+                    "value": "0"
+                },
+                "enabled": true,
+                "error_message": "Found frozen objects. Please unfreeze them",
+                "fix_script": "for obj in objects where obj.isFrozen do obj.isFrozen = false",
+                "name": "Check for Frozen Objects",
+                "type": "rule"
+            }
+        ],
+        "enabled": true,
+        "name": "Scene Integrity",
+        "type": "folder"
+    },
+    {
+        "children": [
+            {
+                "condition": {
+                    "maxscript_property": "lights.count",
+                    "type": "min_value",
+                    "value": "1"
+                },
+                "enabled": true,
+                "error_message": "No lights found in the scene!",
+                "fix_script": "",
+                "name": "Check for Scene Lights",
+                "type": "rule"
+            },
+            {
+                "condition": {
+                    "maxscript_property": "isKindOf (viewport.getCamera()) Camera",
+                    "type": "property_equals",
+                    "value": "True"
+                },
+                "enabled": true,
+                "error_message": "The active viewport is not a camera!",
+                "fix_script": "",
+                "name": "Check for Active Camera Viewport",
+                "type": "rule"
+            }
+        ],
+        "enabled": true,
+        "name": "Camera & Lighting",
+        "type": "folder"
+    }
+]
