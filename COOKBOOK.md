@@ -75,6 +75,49 @@ Here is a comprehensive list of useful snippets for the **MaxScript Target** and
 | Number of Hidden Objects           | `(for obj in objects where obj.isHidden collect obj).count`    | `for obj in objects where obj.isHidden do obj.isHidden = false` |
 | Objects with Default Names         | `(for o in objects where matchPattern o.name pattern:"*0*" collect o).count` |                                                                   |
 
+## XRefs (Reference Scenes)
+
+In large or team projects, using XRefs is very common. These rules help prevent issues related to missing or outdated files.
+
+| Description | MaxScript Target Snippet | Auto-Fix Script Example |
+|-------------|--------------------------|--------------------------|
+| Number of unresolved or missing XRef scenes | `(for i=1 to xrefs.getXRefFileCount() where not doesFileExist (xrefs.getXRefFile i).filename collect i).count` | — |
+| Number of disabled XRef objects | `(for o in (getClassInstances XRefObject) where o.disabled collect o).count` | `for o in (getClassInstances XRefObject) do o.disabled = false` |
+
+---
+
+## Render Elements
+
+These rules ensure that all required passes for compositing are present in your render setup.
+
+| Description | MaxScript Target Snippet | Auto-Fix Script Example |
+|-------------|--------------------------|--------------------------|
+| Checks if the Z-Depth Render Element is active | `(for i=1 to maxOps.GetNumRenderElements() where isKindOf (maxOps.GetRenderElement i) Z_Depth collect i).count > 0` | — |
+| Checks if Render Elements are active globally | `(maxOps.GetRenderElementMgr()).enabled` | `(maxOps.GetRenderElementMgr()).enabled = true` |
+
+---
+
+## Advanced Object Properties
+
+These rules catch hidden issues that can cause strange artifacts in renders.
+
+| Description | MaxScript Target Snippet | Auto-Fix Script Example |
+|-------------|--------------------------|--------------------------|
+| Number of objects with negative scaling | `(for o in geometry where o.scale.x < 0 or o.scale.y < 0 or o.scale.z < 0 collect o).count` | — |
+| Objects with no material assigned | `(for o in geometry where o.material == undefined collect o).count` | — |
+| Objects with an animated visibility track | `(for o in objects where o.visibility.controller != undefined and o.visibility.controller.keys.count > 0 collect o).count` | — |
+
+---
+
+## Animation & Time
+
+| Description | MaxScript Target Snippet | Auto-Fix Script Example |
+|-------------|--------------------------|--------------------------|
+| Checks if the render frame range is set to "Single" | `renderSceneDialog.frameType == #single` | `renderSceneDialog.frameType = #range` |
+| Number of frames to be rendered | `(timeConfiguration.animationRange.end - timeConfiguration.animationRange.start + 1)` | — |
+
+---
+
 ### ### Selected Object (`$`)
 
 *The `$` symbol refers to the first selected object.*
