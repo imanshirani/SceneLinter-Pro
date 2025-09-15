@@ -42,14 +42,14 @@ Here is a comprehensive list of useful snippets for the **MaxScript Target** and
 
 | Description                | MaxScript Target Snippet                               |
 | -------------------------- | ------------------------------------------------------ |
-| Renderable                 | `renderWidth`                                          |
-| Inherit Visibility         | `renderHeight`                                         |
-| Visible to Camera          | `(rendSaveFile == true and rendOutputFilename != "")`  |
-| Visible to Reflection/Refraction      | `renderers.current as string`                          |
-| Receive Shadows            | `(timeConfiguration.animationRange.end - timeConfiguration.animationRange.start + 1)` |
-| Cast Shadows               | `numAtmospherics()`                                    |
-| Apply Atmospherics         | `numAtmospherics()`                                    |
-| Render Occluded Objects    | `numAtmospherics()`                                    |
+| Renderable                 | `$.renderable`                                          |
+| Inherit Visibility         | `$.inheritVisibility`                                         |
+| Visible to Camera          | `$.primaryVisibility`  |
+| Visible to Reflection/Refraction      | `$.secondaryVisibility`                          |
+| Receive Shadows            | `$.receiveShadows` |
+| Cast Shadows               | `$.castShadows`                                    |
+| Apply Atmospherics         | `$.applyAtmospherics`                                    |
+| Render Occluded Objects    | `$.renderOccluded`                                    |
 
 
 ### ### Scene & Objects
