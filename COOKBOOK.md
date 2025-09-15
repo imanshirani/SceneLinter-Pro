@@ -219,10 +219,10 @@ These examples illustrate how to detect and optionally fix common issues in prod
 
    - **Rule Name:** `Check for Lights with Zero Multiplier` 
    - **Condition Type:** `max_value`  
-   - **MaxScript:** `maxscript<br>(for l in lights where isProperty l #multiplier and l.multiplier <= 0 collect l).count` 
+   - **MaxScript:** `(for l in lights where isProperty l #multiplier and l.multiplier <= 0 collect l).count` 
    - **Expected Value:** `0` 
    - **Error Message:** `Found lights with zero or negative multiplier. ` 
-   - **Auto-Fix Script:** `maxscript<br>for l in lights where isProperty l #multiplier and l.multiplier <= 0 do l.multiplier = 1` 
+   - **Auto-Fix Script:** `for l in lights where isProperty l #multiplier and l.multiplier <= 0 do l.multiplier = 1` 
 
 ---
 
@@ -230,7 +230,7 @@ These examples illustrate how to detect and optionally fix common issues in prod
 
    - **Rule Name:** `Check for Animated Camera FOV` 
    - **Condition Type:** `max_value` 
-   - **MaxScript:** `maxscript<br>(for c in cameras where c.fov.isAnimated collect c).count` 
+   - **MaxScript:** `(for c in cameras where c.fov.isAnimated collect c).count` 
    - **Expected Value:** `0`  
    - **Error Message:** `Found cameras with animated FOV.` 
    - **Auto-Fix Script:** *(Leave empty – removing keyframes can be dangerous)*  
@@ -241,7 +241,7 @@ These examples illustrate how to detect and optionally fix common issues in prod
 
    - **Rule Name:** `Check for Legacy Standard Materials ` 
    - **Condition Type:** `max_value`   
-   - **MaxScript:**  `maxscript<br>(for m in sceneMaterials where isKindOf m StandardMaterial collect m).count` 
+   - **MaxScript:**  `(for m in sceneMaterials where isKindOf m StandardMaterial collect m).count` 
    - **Expected Value:** `0` 
    - **Error Message:** `Found legacy Standard Materials. Please convert to Physical/PBR.` 
    - **Auto-Fix Script:** *(Leave empty – converting materials is complex)* 
@@ -253,9 +253,9 @@ These examples illustrate how to detect and optionally fix common issues in prod
 
    - **Rule Name:** `Check for Scaled Dummy Helpers`                                         
    - **Condition Type:** `max_value`                                                           
-   - **MaxScript:** `maxscript<br>(for h in helpers where isKindOf h Dummy and h.scale != [1,1,1] collect h).count` 
+   - **MaxScript:** `(for h in helpers where isKindOf h Dummy and h.scale != [1,1,1] collect h).count` 
    - **Expected Value:** `0` 
    - **Error Message:** `Found Dummy helpers with non-uniform scale. Please reset their scale.` |
-   - **Auto-Fix Script:** `maxscript<br>for h in helpers where isKindOf h Dummy do h.scale = [1,1,1]` 
+   - **Auto-Fix Script:** `for h in helpers where isKindOf h Dummy do h.scale = [1,1,1]` 
 
 
