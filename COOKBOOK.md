@@ -38,6 +38,20 @@ Here is a comprehensive list of useful snippets for the **MaxScript Target** and
 | Animation Frame Count      | `(timeConfiguration.animationRange.end - timeConfiguration.animationRange.start + 1)` |
 | Atmospheric Effects Count  | `numAtmospherics()`                                    |
 
+### ### Rendering Control
+
+| Description                | MaxScript Target Snippet                               |
+| -------------------------- | ------------------------------------------------------ |
+| Renderable                 | `renderWidth`                                          |
+| Inherit Visibility         | `renderHeight`                                         |
+| Visible to Camera          | `(rendSaveFile == true and rendOutputFilename != "")`  |
+| Visible to Reflection/Refraction      | `renderers.current as string`                          |
+| Receive Shadows            | `(timeConfiguration.animationRange.end - timeConfiguration.animationRange.start + 1)` |
+| Cast Shadows               | `numAtmospherics()`                                    |
+| Apply Atmospherics         | `numAtmospherics()`                                    |
+| Render Occluded Objects    | `numAtmospherics()`                                    |
+
+
 ### ### Scene & Objects
 
 | Description                        | MaxScript Target Snippet                                       | Auto-Fix Script Example                                           |
@@ -93,18 +107,12 @@ Let's create a rule to ensure no object has a TurboSmooth modifier with more tha
 1.  Click **Add New**.
 2.  Fill in the fields:
 
-    * **Rule Name:** `Check TurboSmooth Iterations`
-    * **Condition Type:** `collection_property_all_match` (We need to slightly adapt this)
-        * Actually, let's use a more direct approach for this one:
-    * **Condition Type:** `max_value`
-    * **MaxScript Target/Prop:**
-        ```maxscript
-        (local max_iter = 0; for o in geometry where isProperty o.modifiers #TurboSmooth do (max_iter = max max_iter o.modifiers[#TurboSmooth].iterations); max_iter)
-        ```
-        *(This complex script finds the maximum iteration value among all TurboSmooth modifiers in the scene)*
-    * **Expected Value:** `3`
-    * **Error Message:** `Found objects with TurboSmooth iterations greater than 3.`
+    * **Rule Name:** `Check: All Geometry Visible to Camera`
+    * **Condition Type:** `collection_property_all_match`
+    * **MaxScript Target/Prop:** `geometry`
+    * **Expected Value:** `primaryVisibility`
+    * **Error Message:** `The following objects are not visible to the camera`
     * **Auto-Fix Script:**
         ```maxscript
-        for o in geometry where isProperty o.modifiers #TurboSmooth and o.modifiers[#TurboSmooth].iterations > 3 do o.modifiers[#TurboSmooth].iterations = 3
+        for obj in geometry where obj.primaryVisibility == false do obj.primaryVisibility = true
         ```
