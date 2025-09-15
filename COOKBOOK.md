@@ -51,6 +51,19 @@ Here is a comprehensive list of useful snippets for the **MaxScript Target** and
 | Apply Atmospherics         | `$.applyAtmospherics`                                    |
 | Render Occluded Objects    | `$.renderOccluded`                                    |
 
+### ###  SuperClass
+
+| Description                        | MaxScript Target Snippet                                       | Auto-Fix Script Example                                           |
+| ---------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
+| A collection of all geometric 3D objects.  | `geometry`                  |` for obj in geometry where obj.renderable == false do obj.renderable = true`                 |
+| A collection of all light objects.         | `lights`                    |` for l in lights where l.on == false do l.on = true`                 |
+| A collection of all camera objects.        | `cameras`                   |                 |
+| A collection of all 2D spline shapes.      | `shapes`                    |` for s in shapes where s.renderable == true do s.renderable = false`                 |
+| A collection of all helper objects.        | `helpers`                   |                 |
+| A collection of all materials in the Material Editor.  | `sceneMaterials`                  |                 |
+| A collection of all objects that are currently frozen.  | `(for obj in objects where obj.isFrozen collect obj)`      |`for obj in objects where obj.isFrozen do obj.isFrozen = false`|
+| A broad collection of nearly all scene nodes.  | `objects`                  |` for obj in geometry where obj.renderable == false do obj.renderable = true`                 |
+
 
 ### ### Scene & Objects
 
