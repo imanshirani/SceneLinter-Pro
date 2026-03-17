@@ -5,6 +5,9 @@ A powerful and customizable scene validation tool for **Autodesk 3ds Max**.
 With this script, you can define a set of rules to validate your scene before rendering, helping you catch common mistakes and avoid faulty renders.
 
 [![Donate ❤️](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate/?hosted_button_id=LAMNRY6DDWDC4)
+![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![PyQt6](https://img.shields.io/badge/GUI-PyQt6-green.svg)
+![License](https://img.shields.io/badge/License-MIT-purple.svg)
 
 ---
 
