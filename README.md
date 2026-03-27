@@ -36,6 +36,17 @@ With this tool, you can:
 
 
 ---
+## 📦 Installation
+
+Installing the plugin is quick and requires no manual setup in 3ds Max.
+
+1. **Unzip** the downloaded package.
+2. **Copy** the `.bundle` folder to the Autodesk Application Plugins directory:
+   ```text
+   C:\ProgramData\Autodesk\ApplicationPlugins
+
+or 
+
 
 ## ⚙️ Installation
 1️⃣ **Download the Script**  
